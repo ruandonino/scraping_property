@@ -73,7 +73,7 @@ def scrape_properties():
 
     # Load the web page
     driver.get(url)
-    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[text()='Aceito']"))).click()
+    WebDriverWait(driver, 100).until(EC.element_to_be_clickable((By.XPATH, "//button[text()='Aceito']"))).click()
 
     # Get total number of pages
     quant_pag_text = driver.find_element(By.CSS_SELECTOR, '.Title-sc-1oqs0ed-0.kNcbvY').text
