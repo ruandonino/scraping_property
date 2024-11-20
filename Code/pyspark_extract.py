@@ -21,7 +21,7 @@ def get_chrome_options():
     options.add_argument("--window-size=1920,1080")
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--allow-running-insecure-content')
-    options.add_argument(f'--proxy-server=181.41.194.186:80')
+    #options.add_argument(f'--proxy-server=172.67.222.208:80')
     user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36'
     options.add_argument(f'user-agent={user_agent}')
     return options
@@ -77,7 +77,7 @@ def scrape_properties():
     #WebDriverWait(driver, 100).until(EC.element_to_be_clickable((By.XPATH, "//button[text()='Aceito']"))).click()
 
     # Get total number of pages
-    time.sleep(50)
+    time.sleep(10)
     print(driver.page_source)
     quant_pag_text = driver.find_element(By.CSS_SELECTOR, '.Title-sc-1oqs0ed-0.kNcbvY').text
     total_pages = math.ceil(float(re.search(r'(\d+)', quant_pag_text).group(1)) / 20)
