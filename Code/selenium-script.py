@@ -98,7 +98,7 @@ driver.quit()
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
+#from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
@@ -122,7 +122,7 @@ def get_chrome_options():
 
 
 # Extract data from a property card
-def extract_property_data(card, reg_price, patterns):
+def extract_property_data(card, patterns):
     house = {}
     try:
         price = card.find_element(By.CSS_SELECTOR, '.Price-sc-12dh9kl-3.geYYII')

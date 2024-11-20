@@ -27,7 +27,7 @@ def get_chrome_options():
 
 
 # Extract data from a property card
-def extract_property_data(card, reg_price, patterns):
+def extract_property_data(card, patterns):
     house = {}
     try:
         price = card.find_element(By.CSS_SELECTOR, '.Price-sc-12dh9kl-3.geYYII')
@@ -52,7 +52,7 @@ def extract_property_data(card, reg_price, patterns):
         return None
 
 def saveDataframeToParquet(df_data, output_path):
-  df_data.write.mode("overwrite").parquet(output_path)
+  df_data.to_parquet(output_path)
   print(f"Data saved to {output_path}")
 # Main scraping function
 def scrape_properties():
@@ -76,6 +76,7 @@ def scrape_properties():
     #WebDriverWait(driver, 100).until(EC.element_to_be_clickable((By.XPATH, "//button[text()='Aceito']"))).click()
 
     # Get total number of pages
+    time.sleep(10)
     quant_pag_text = driver.find_element(By.CSS_SELECTOR, '.Title-sc-1oqs0ed-0.kNcbvY').text
     total_pages = math.ceil(float(re.search(r'(\d+)', quant_pag_text).group(1)) / 20)
     list_of_houses = []
@@ -101,6 +102,7 @@ def scrape_properties():
 
     # Save results to CSV and Parquet
     df_houses = pd.DataFrame(list_of_houses)
+    print(df_houses)
     saveDataframeToParquet(df_houses, output_path)
 
 
