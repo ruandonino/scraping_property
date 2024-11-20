@@ -77,6 +77,7 @@ def scrape_properties():
 
     # Get total number of pages
     time.sleep(10)
+    print(driver.page_source)
     quant_pag_text = driver.find_element(By.CSS_SELECTOR, '.Title-sc-1oqs0ed-0.kNcbvY').text
     total_pages = math.ceil(float(re.search(r'(\d+)', quant_pag_text).group(1)) / 20)
     list_of_houses = []
