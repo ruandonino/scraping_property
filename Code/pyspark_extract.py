@@ -71,7 +71,7 @@ def scrape_properties():
         'bathrooms': r'(\d+)\s*(?:banheiros?|ban.)',
         'garage': r'(\d+)\s*vagas?'
     }
-
+    time.sleep(50)
     # Load the web page
     driver.get(url)
     #WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[text()='Aceito']"))).click()
