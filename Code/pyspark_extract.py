@@ -7,6 +7,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
+from pyvirtualdisplay import Display
 import pandas as pd
 import re
 import time
@@ -20,14 +21,16 @@ def get_chrome_options():
     #options.add_experimental_option("excludeSwitches", ["enable-automation"])
     #options.add_argument('--headless=new')
     options.add_argument('--no-sandbox')
+    options.add_argument('--disable-gpu')
     options.add_argument('--disable-extensions')
     options.add_argument('--proxy-bypass-list=localhost')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument("--window-size=1920,1080")
+    options.add_argument("--start-maximized")
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--allow-running-insecure-content')
     #options.add_argument(f'--proxy-server=https://brd-customer-hl_73771bb6-zone-residential_proxy1:uw6q0yl3qrcm@brd.superproxy.io:22225')
-    user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36'
+    user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.30'
     options.add_argument(f'user-agent={user_agent}')
     return options
 
@@ -63,6 +66,9 @@ def saveDataframeToParquet(df_data, output_path):
   print(f"Data saved to {output_path}")
 # Main scraping function
 def scrape_properties():
+    display = Display(visible=0, size=(800, 600))
+    display.start()
+
     today = date.today()
     website = 'imovelweb'
     output_path = f"gs://python_files_property/outputs_extracted_data/{website}/{today}/{website}-{today}"
@@ -92,7 +98,7 @@ def scrape_properties():
         'bathrooms': r'(\d+)\s*(?:banheiros?|ban.)',
         'garage': r'(\d+)\s*vagas?'
     }
-    #time.sleep(10)
+    time.sleep(10)
     # Load the web page
     driver.get(url)
     #WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[text()='Aceito']"))).click()
