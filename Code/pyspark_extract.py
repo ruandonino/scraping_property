@@ -79,7 +79,7 @@ def scrape_properties():
     proxy_port = "33335"
 
     # formulate the proxy url with authentication
-    proxy_url = f"http://{proxy_username}:{proxy_password}@{proxy_address}:{proxy_port}"
+    proxy_url = f"https://{proxy_username}:{proxy_password}@{proxy_address}:{proxy_port}"
     # set selenium-wire options to use the proxy
     seleniumwire_options = {
         "proxy": {
