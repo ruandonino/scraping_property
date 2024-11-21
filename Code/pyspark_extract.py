@@ -20,8 +20,8 @@ def get_chrome_options():
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument("--window-size=1920,1080")
     options.add_argument('--ignore-certificate-errors')
-    #options.add_argument('--allow-running-insecure-content')
-    #options.add_argument(f'--proxy-server=http://4fXmnp4FwD5D:WPon9BOBL0dA_region-sa@superproxy.zenrows.com:1337')
+    options.add_argument('--allow-running-insecure-content')
+    options.add_argument(f'--proxy-server=http://4fXmnp4FwD5D:WPon9BOBL0dA_region-sa@superproxy.zenrows.com:1337')
     user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36'
     options.add_argument(f'user-agent={user_agent}')
     return options
