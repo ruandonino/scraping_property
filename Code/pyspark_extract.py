@@ -15,13 +15,13 @@ from datetime import date
 def get_chrome_options():
     options = Options()
     options.add_argument('--disable-blink-features=AutomationControlled')
-    options.add_argument('--headless')
+    options.add_argument('--headless=new')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument("--window-size=1920,1080")
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--allow-running-insecure-content')
-    options.add_argument(f'--proxy-server=http://4fXmnp4FwD5D:WPon9BOBL0dA_region-sa@superproxy.zenrows.com:1337')
+    options.add_argument(f'--proxy-server=http://4fXmnp4FwD5D:WPon9BOBL0dA@superproxy.zenrows.com:1337')
     user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36'
     options.add_argument(f'user-agent={user_agent}')
     return options
@@ -71,10 +71,22 @@ def scrape_properties():
         'bathrooms': r'(\d+)\s*(?:banheiros?|ban.)',
         'garage': r'(\d+)\s*vagas?'
     }
-    time.sleep(50)
+    time.sleep(10)
     # Load the web page
     driver.get(url)
     #WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[text()='Aceito']"))).click()
+
+    cookie = {
+        "name": "example_cookie",
+        "value": "example_value",
+        "domain": "www.imovelweb.com.br",
+        "path": "/",
+        "secure": True
+    }
+    driver.add_cookie(cookie)
+
+    # Refresh the page to apply the cookie
+    driver.refresh()
 
     # Get total number of pages
     time.sleep(10)
