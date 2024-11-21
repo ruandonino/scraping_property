@@ -137,9 +137,10 @@ def extract_property_data(card, patterns):
         house['address'] = address.text.strip()
         house['neighborhood'] = city.text.strip()
 
+        del patterns['price']
         for key, pattern in patterns.items():
             match = re.search(pattern, infos.text.strip())
-            house[key] = int(match.group(1)) if match else (1 if key == 'bathrooms' else None)
+            house[key] = int(match.group(1)) i f match else (1 if key == 'bathrooms' else None)
 
         return house
     except Exception as e:
