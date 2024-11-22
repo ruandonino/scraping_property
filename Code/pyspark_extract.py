@@ -1,5 +1,5 @@
 import seleniumwire.undetected_chromedriver as uc
-import undetected_chromedriver as uc
+#import undetected_chromedriver as uc
 from seleniumwire import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
@@ -7,7 +7,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
-from pyvirtualdisplay import Display
 import pandas as pd
 import re
 import time
@@ -19,14 +18,12 @@ def get_chrome_options():
     options = Options()
     options.add_argument('--disable-blink-features=AutomationControlled')
     #options.add_experimental_option("excludeSwitches", ["enable-automation"])
-    #options.add_argument('--headless=new')
+    options.add_argument('--headless')
     options.add_argument('--no-sandbox')
-    options.add_argument('--disable-gpu')
     options.add_argument('--disable-extensions')
     options.add_argument('--proxy-bypass-list=localhost')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument("--window-size=1920,1080")
-    options.add_argument("--start-maximized")
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--allow-running-insecure-content')
     #options.add_argument(f'--proxy-server=https://brd-customer-hl_73771bb6-zone-residential_proxy1:uw6q0yl3qrcm@brd.superproxy.io:22225')
@@ -66,9 +63,6 @@ def saveDataframeToParquet(df_data, output_path):
   print(f"Data saved to {output_path}")
 # Main scraping function
 def scrape_properties():
-    display = Display(visible=0, size=(800, 600))
-    display.start()
-
     today = date.today()
     website = 'imovelweb'
     output_path = f"gs://python_files_property/outputs_extracted_data/{website}/{today}/{website}-{today}"
@@ -88,7 +82,7 @@ def scrape_properties():
     }
 
     options = get_chrome_options()
-    driver = uc.Chrome(service=Service(ChromeDriverManager().install()), options=options, seleniumwire_options=seleniumwire_options)
+    driver = webdriver.Chrome(options=options, seleniumwire_options=seleniumwire_options)
 
     url = 'https://www.imovelweb.com.br/imoveis-aluguel-itajuba-mg.html'
     patterns = {
