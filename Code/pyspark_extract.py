@@ -68,7 +68,7 @@ def saveDataframeToParquet(df_data, output_path):
 def scrape_properties():
     today = date.today()
     website = 'imovelweb'
-    output_path = f"gs://python_files_property/outputs_extracted_data/{website}/{today}/{website}-{today}"
+    output_path = f"gs://python_files_property/outputs_extracted_data/{website}/{today}/{website}-{today}.parquet"
     # configure the proxy
     proxy_username = "brd-customer-hl_73771bb6-zone-residential_proxy1"
     proxy_password = "uw6q0yl3qrcm"
