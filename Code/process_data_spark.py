@@ -16,7 +16,7 @@ def process_data_spark():
     today = date.today()
     website = 'imovelweb'
     # Define the path to the Parquet file on Google Cloud Storage
-    read_file_path = f"gs://python_files_property/outputs_extracted_data/{website}/{today}/{website}-{today}"
+    read_file_path = f"gs://python_files_property/outputs_extracted_data/{website}/{today}/{website}-{today}.parquet"
     # Read the Parquet file into a DataFrame
     df_data_stock = read_df(spark,read_file_path)
 
