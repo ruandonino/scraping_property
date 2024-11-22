@@ -62,7 +62,7 @@ def extract_property_data(card, patterns):
 def saveDataframeToParquet(df_data, output_path):
     logging.basicConfig(level=logging.DEBUG)
     print('Saving dataframe to parquet')
-    df_data.to_parquet(output_path)
+    df_data.to_parquet(output_path, storage_options={"token": "/opt/airflow/config/sec.json"})
     print(f"Data saved to {output_path}")
 # Main scraping function
 def scrape_properties():
