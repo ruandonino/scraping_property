@@ -12,6 +12,7 @@ import re
 import time
 import math
 from datetime import date
+import logging
 
 # Setup Chrome options
 def get_chrome_options():
@@ -59,8 +60,10 @@ def extract_property_data(card, patterns):
         return None
 
 def saveDataframeToParquet(df_data, output_path):
-  df_data.to_parquet(output_path)
-  print(f"Data saved to {output_path}")
+    logging.basicConfig(level=logging.DEBUG)
+    print('Saving dataframe to parquet')
+    df_data.to_parquet(output_path)
+    print(f"Data saved to {output_path}")
 # Main scraping function
 def scrape_properties():
     today = date.today()
